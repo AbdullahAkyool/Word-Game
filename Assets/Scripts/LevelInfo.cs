@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class LevelInfo : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int levelIndex;
 
-    // Update is called once per frame
-    void Update()
+    public TMP_Text levelText;
+    public TMP_Text levelQuestion;
+    public TMP_Text levelScore;
+
+    public void LoadLevel()
     {
+        PanelController.Instance.OpenGamePanel();
         
+        JsonFilesController.Instance.ReadJsonFile(levelIndex);
+        JsonFilesController.Instance.CreateLevel();
     }
 }

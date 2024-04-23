@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 3247252634985630056}
   - component: {fileID: 6350016006013311144}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Level Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 6694676641615595760}
   - component: {fileID: 5278528765654996315}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: Level Question
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -603,7 +603,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2943239138407281633}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3010747122444253849}
+        m_TargetAssemblyTypeName: LevelInfo, Assembly-CSharp
+        m_MethodName: LoadLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5599851411367847335
 GameObject:
   m_ObjectHideFlags: 0
@@ -798,7 +810,7 @@ GameObject:
   - component: {fileID: 1145448112151823989}
   - component: {fileID: 7810791966722580120}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Level Index
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1144,3 +1156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f79b7511fc4d974887dae5e862ba5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelIndex: 0
+  levelText: {fileID: 7810791966722580120}
+  levelQuestion: {fileID: 5278528765654996315}
+  levelScore: {fileID: 6350016006013311144}
