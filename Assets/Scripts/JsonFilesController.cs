@@ -9,7 +9,7 @@ using UnityEngine;
 public class JsonFilesController : MonoBehaviour
 {
     public static JsonFilesController Instance;
-    
+
     public GameObject letterPrefab;
     public Transform lettersParent;
     public TMP_Text titleText;
@@ -17,6 +17,8 @@ public class JsonFilesController : MonoBehaviour
     public Transform levelsParent;
     public GameObject levelPrefab;
     private static List<string> allJsonLevels;
+
+    public List<GameObject> allLetters = new List<GameObject>();
 
     private TextAsset jsonData;
     private LevelData levelData;
@@ -68,14 +70,39 @@ public class JsonFilesController : MonoBehaviour
         }
     }
 
-    public void CreateLevel()
+    public void CreateLetter()
     {
         foreach (Tile tile in levelData.tiles)
         {
             GameObject newLetter = Instantiate(letterPrefab, lettersParent);
-            newLetter.GetComponentInChildren<TMP_Text>().text = tile.character;
-            Vector3 position = new Vector3(tile.position.x, tile.position.y, tile.position.z);
-            newLetter.transform.localPosition = position;
+            
+            newLetter.GetComponent<Letter>().letterText.text = tile.character;
+            newLetter.GetComponent<Letter>().letterId= tile.id;
+            newLetter.GetComponent<Letter>().letterPos= new Vector3(tile.position.x, tile.position.y, tile.position.z);
+            
+            allLetters.Add(newLetter);
+
+            foreach (var child in tile.children)
+            {
+                newLetter.GetComponent<Letter>().letterChildren.Add(child);
+            }
+            
+            // foreach (var child in tile.children)
+            // {
+            //     for (int i = 0; i < allLetters.Count; i++)
+            //     {
+            //         if (child == allLetters[i].GetComponent<Letter>().letterId)
+            //         {
+            //             var currentChild = allLetters[i];
+            //
+            //             if (currentChild != this)
+            //             {
+            //                 newLetter.GetComponent<Letter>().letterChildren.Add(currentChild);   
+            //             }
+            //         }
+            //     }
+            // }
+
         }
     }
 }
