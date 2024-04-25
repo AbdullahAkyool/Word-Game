@@ -58,4 +58,12 @@ public class CheckWord : MonoBehaviour
         
         
     }
+
+    public void ClearPanel()
+    {
+        for (int i = 0; i < completedWordParent.Count; i++)
+        {
+            completedWordParent[i].text = "";
+        }
+    }
 }

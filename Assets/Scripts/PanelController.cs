@@ -28,6 +28,10 @@ public class PanelController : MonoBehaviour
         mainMenuPanel.SetActive(false);
         levelsPanel.SetActive(true);
         gamePanel.SetActive(false);
+        
+        
+        SelectLetterManager.Instance.DestroyCells();
+        CheckWord.Instance.ClearPanel();
     }
 
     public void OpenGamePanel()
