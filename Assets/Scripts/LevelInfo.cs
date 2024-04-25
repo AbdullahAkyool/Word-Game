@@ -13,11 +13,11 @@ public class LevelInfo : MonoBehaviour
     public TMP_Text levelQuestion;
     public TMP_Text levelScore;
 
-    public Button startLevelButton;
+    [SerializeField]private Button startLevelButton;
 
     private void Start()
     {
-        startLevelButton.onClick.AddListener(() => ActionManager.Instance.OnLettersCreated?.Invoke());
+        startLevelButton.onClick.AddListener(() => ActionManager.Instance.OnCellsCreated?.Invoke());
     }
 
     public void LoadLevel()

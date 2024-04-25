@@ -14,44 +14,21 @@ public class Letter : MonoBehaviour
     public TMP_Text letterText;
     public List<int> letterChildren;
 
-    public bool isActivated = false;
-    public int targetCellIndex;
+    [SerializeField] private bool isActivated = false;
+    [SerializeField] private int targetCellIndex;
 
     private void Start()
     {
-        UpdateChildrenLettersInitialColor();
+        SelectLetterManager.Instance.UpdateLetterStats();
 
         transform.localPosition = letterPos;
-    }
-
-    private void UpdateChildrenLettersInitialColor()
-    {
-        if (letterChildren.Count > 0)
-        {
-            foreach (var childId in letterChildren)
-            {
-                for (int i = 0; i < JsonFilesController.Instance.allLetters.Count; i++)
-                {
-                    if (childId == JsonFilesController.Instance.allLetters[i].GetComponent<Letter>().letterId)
-                    {
-                        var childLetter = JsonFilesController.Instance.allLetters[i].GetComponent<Letter>();
-
-                        if (childLetter != this)
-                        {
-                            childLetter.GetComponent<MeshRenderer>().material.color = Color.gray;
-                            childLetter.GetComponent<BoxCollider>().enabled = false;
-                        }
-                    }
-                }
-            }
-        }
     }
 
     public void SelectLetter()
     {
         isActivated = !isActivated;
 
-        if (isActivated) // Harf etkinleştirildiğinde
+        if (isActivated)
         {
             for (int i = 0; i < SelectLetterManager.Instance.cellList.Count; i++)
             {
@@ -62,19 +39,26 @@ public class Letter : MonoBehaviour
                     transform.DOMove(targetCell.position, 0.3f).OnComplete(() =>
                     {
                         SelectLetterManager.Instance.cellList[targetCellIndex].isEmpty = true;
+                        transform.parent = SelectLetterManager.Instance.cellList[targetCellIndex].transform;
+
+                        JsonFilesController.Instance.allLetters.Remove(gameObject);
                     });
                     break;
                 }
             }
         }
-        else // Harf pasif hale getirildiğinde
+        else
         {
             if (targetCellIndex != -1)
             {
                 transform.DOMove(letterPos, 0.3f).OnComplete(() =>
                 {
                     SelectLetterManager.Instance.cellList[targetCellIndex].isEmpty = false;
-                    targetCellIndex = -1; // Hücre endeksi sıfırlanıyor.
+                    transform.parent = JsonFilesController.Instance.lettersParent.transform;
+
+                    JsonFilesController.Instance.allLetters.Add(gameObject);
+
+                    targetCellIndex = -1;
                 });
             }
         }

@@ -11,5 +11,6 @@ public class ActionManager : MonoBehaviour
         Instance = this;
     }
 
-    public Action OnLettersCreated;
+    public Action OnCellsCreated;
+    public Action OnLettersChildrenUpdate;
 }

@@ -10,12 +10,12 @@ public class JsonFilesController : MonoBehaviour
 {
     public static JsonFilesController Instance;
 
-    public GameObject letterPrefab;
+    [SerializeField]private GameObject letterPrefab;
     public Transform lettersParent;
-    public TMP_Text titleText;
+    [SerializeField]private TMP_Text titleText;
 
-    public Transform levelsParent;
-    public GameObject levelPrefab;
+    [SerializeField]private Transform levelsParent;
+    [SerializeField]private GameObject levelPrefab;
     private static List<string> allJsonLevels;
 
     public List<GameObject> allLetters = new List<GameObject>();
